@@ -1,0 +1,30 @@
+/*Estilo body*/
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/*Estilo h1*/
+h1 {
+    color: #333;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+}
+
+/*Estilo parrafos*/
+p {
+    color: #555;
+    margin: 15px;
+}
+
+/*Estilo footer*/
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e7eaec;
+    color: white;
+    border-radius: 5px;
+}
