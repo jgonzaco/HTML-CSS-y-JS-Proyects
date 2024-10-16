@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Calculadora</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript">
+    const vaciar = () => {//Funcion vacio
+      document.getElementById("pantalla").value = "";
+    }
+
+    const cuadrado = () => {// Funcion de cuadrado
+      if (errores()) return;
+      let num = document.getElementById("pantalla");
+      num.value = num.value * num.value;
+      info_respuesta();
+    }
+
+    const info_respuesta = function () {// funcion manejo de respuesta
+      let num = document.getElementById("pantalla").value;
+      let info = document.getElementById("info");
+
+      if (num < 100) {
+        info.innerHTML = "Info: El resultado es menor que 100";
+      } else
+        if (num >= 100 && num <= 200) {
+          info.innerHTML = "Info: El resultado está entre 100 y 200";
+        } else {
+          info.innerHTML = "Info: El resultado es superior a 200";
+        }
+    }
+
+    const mod = function () {// Funcion Modal
+      if (errores()) return;
+      let num = document.getElementById("pantalla").value;
+
+      if (num < 0) {
+        document.getElementById("pantalla").value = num * -1;
+      }
+    }
+
+    const fact = function () {// Funcion factorial
+      if (errores()) return;
+      let num = document.getElementById("pantalla").value;
+
+      let factorial = 1;
+      for (let i = 1; i <= num; i++) {
+        factorial = factorial * i;
+      }
+      document.getElementById("pantalla").value = factorial;
+    }
+
+    //3. Operaciones binarias
+    let num1 = null;
+    let operacion = null;
+
+    const mul = function () {// funcion multiplicacion
+      if (errores()) return;
+      if (num1 === null) {
+        num1 = parseFloat(document.getElementById("pantalla").value);
+        operacion = "mul";
+        vaciar();
+      } else {
+        let num2 = parseFloat(document.getElementById("pantalla").value);
+        let multiplicar = num1 * num2;
+        num1 = null;
+        operacion = null;
+        return multiplicar;
+      }
+    }
+
+    const add = function () {// Funcion Suma
+      if (errores()) return;
+      if (num1 === null) {
+        num1 = parseFloat(document.getElementById("pantalla").value);
+        operacion = "add";
+        vaciar();
+      } else {
+        let num2 = parseFloat(document.getElementById("pantalla").value);
+        let suma = num1 + num2;
+        num1 = null;
+        operacion = null;
+        return suma;
+      }
+    }
+
+    const eq = function () {// Funcion igual
+      if (errores()) return;
+      let resultado = null;
+
+      if (operacion === "mul") {
+        resultado = mul();
+      } else if (operacion === "add") {
+        resultado = add();
+      }
+
+      if (resultado !== null) {
+        document.getElementById("pantalla").value = resultado;
+        info_respuesta();//Funcion para mantener la respuesta
+      }
+    }
+
+    //4. Operaciones en formato CSV
+
+    const sumatorio = function () {//Función sumatorio
+      
+      let array = document.getElementById("pantalla").value.split(",").map(Number);
+      /*for (let i = 0; i < array.length; i++) {
+        array[i] = parseFloat(array[i]);
+      }*/
+
+      let sumaTotal = 0;
+      for (let i = 0; i < array.length; i++) {
+        sumaTotal = sumaTotal + array[i];
+      }
+      document.getElementById("pantalla").value = sumaTotal;
+    }
+
+    const ordenar = function(){//Función ordenar
+      
+      let array = document.getElementById("pantalla").value.split(",").map(Number).sort();
+      document.getElementById("pantalla").value = array;
+    }
+
+    const revertir = function(){//Función revertir
+      
+      let array = document.getElementById("pantalla").value.split(",").map(Number).sort();
+     array.reverse();
+      document.getElementById("pantalla").value = array;
+      
+    }
+
+    //5. Tratamiento de errores
+
+    const errores = function(){
+      let pantalla = document.getElementById("pantalla").value;
+
+      if(isNaN(pantalla)){
+        document.getElementById("pantalla").value = "Error";
+      }else if(pantalla ===""){
+        document.getElementById("pantalla").value = "Introduzca un valor";
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Calculadora de CORE</h1>
+  Número:
+  <input type="text" id="pantalla" onclick="vaciar()">
+
+  <h2 id="info" class="grande" title="Info sobre el número">Info sobre el número</h2>
+
+  <h3>Operaciones Unitarias</h3>
+  <button id="cuadrado" onclick="cuadrado()">x<sup>2</sup></button>
+  <button id="modulo" onclick="mod()">Mod</button>
+  <button id="factorial" onclick="fact()">N!</button>
+
+  <h3>Operaciones Binarias</h3>
+  <button id="multiplicacion" onclick="mul()">*</button>
+  <button id="suma" onclick="add()">+</button>
+  <button id="igual" onclick="eq()">=</button>
+
+  <h3>Operaciones en formato CSV</h3>
+  <button id="sumatorio" onclick="sumatorio()">Σx</button>
+  <button id="ordenar" onclick="ordenar()">ordenar</button>
+  <button id="revertir" onclick="revertir()">revertir</button>
+
+</body>
+
+</html>
