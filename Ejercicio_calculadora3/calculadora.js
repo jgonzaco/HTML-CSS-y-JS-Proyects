@@ -5,3 +5,4 @@ const cubo = ()=>{// Funcion calcular cubo.
 }
 
 document.getElementById("boton").addEventListener('click',cubo);//Cliclar para calcular el cubo.
+document.getElementById("numero").addEventListener('click',blanco);//Vaciar
