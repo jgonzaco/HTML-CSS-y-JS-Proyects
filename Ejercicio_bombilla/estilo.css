@@ -1,0 +1,38 @@
+/*Estilo del cuerpo*/
+body {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center; 
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; 
+    margin: 0;
+}
+ /*Estilo cabecera*/
+h1 {
+    text-align: center; 
+
+}
+
+/*Estilo tamanio imagen*/
+#encendido {
+    width: 200px; 
+    height: 200px; 
+    margin: 20px 0; 
+}
+
+/*Estilo del boton*/
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    margin-bottom: 20px; 
+}
+
+button:hover {
+    background-color: #218838; 
+}
