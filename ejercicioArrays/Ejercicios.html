@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumas al cuadrado</title>
+</head>
+<body>
+    <div id="resultado"></div>
+    <!--1) Hacer un programa que calcule la suma de los valores al cuadrado de un array u objeto
+utilizando, tanto el iterador forEach, como el iterador reduce.-->
+<script>
+    function sumaArray(array){
+            let suma = 0;
+            array.forEach(valor=>{
+                suma += valor * valor;
+            });
+            return suma;
+    }
+
+    function reducir (array){
+        return array.reduce((acumulador, valorActual)=>{
+            return acumulador + valorActual * valorActual;
+        },0);
+    }
+
+    let array1 = [-5, 3, 0, 8, -2, 4];
+    document.getElementById('resultado').innerHTML=`La suma con forEach es: ${sumaArray(array1)}`;
+
+    //Crear un nuevo div con funcion reducir
+    let div = document.createElement('div');
+    div.setAttribute('id','resultado2');
+    div.innerHTML=`La suma con reduce es: ${reducir(array1)}`;
+    document.getElementById('resultado').appendChild(div);
+
+
+
+</script>
+
+<!--2) Hacer otro programa que itere en un array con números positivos y negativos, que elimine
+los números negativos con filter y luego sume el cuadrado de los valores del array con
+reduce.-->
+
+<script>
+    //Utilizacion de filter
+function filtro(array){
+    return array.filter(valor=>valor>0);
+}
+
+//Utilizacion de filter con reduce
+function sumaFiltro(array){
+    let arrayFiltrado = filtro(array);
+    return arrayFiltrado.reduce((acumulador, valorActual)=>{
+            return acumulador + valorActual * valorActual;
+        },0);
+    
+}
+//Resultado de utilizar la funcion filtro -> filter
+let div2 = document.createElement('div');
+        div2.setAttribute('id', 'resultado3');
+        div2.innerHTML = `El array con filter (solo positivos) es: ${filtro(array1)}`;
+        document.getElementById('resultado2').appendChild(div2);
+
+        // Mostrar la suma de los cuadrados de los valores positivos con reduce
+        let div3 = document.createElement('div');
+        div3.setAttribute('id', 'resultado4');
+        div3.innerHTML = `La suma de los cuadrados con reduce y filter es: ${sumaFiltro(array1)}`;
+        document.getElementById('resultado2').appendChild(div3);
+</script>
+
+<!--3) Hacer un programa node que procese la lista de peliculas (pelis de la transparencia de
+ejemplos) y genere un string que indique cual es la película mas taquillera y cuanto dinero
+generó (por ejemplo "La película Star Wars de George Lucas fue la mas taquillera,
+generando 170 millones de dólares).
+Utilizar filter para seleccionar la película, luego map para generar el string y por último
+extraiga el contenido del único elemento del array.-->
+
+<script>
+    let peliculas = [
+        {nombre:'Star Wars', director:'George Lucas', taquilla:170},
+        {nombre:'Avengers', director:'Joss Whedon', taquilla:150},
+        {nombre:'Avatar', director:'James Cameron', taquilla:200 }
+
+    ];
+
+    //Se crea la funcion de filtro de peliculas para el ejercicio
+    function filtroPelis(peliculas){
+
+        let peliculaTaquillera= peliculas.reduce((max, pelicula) =>{
+            return (pelicula.taquilla > max.taquilla) ? pelicula : max;
+        },peliculas[0]);
+
+
+    let mensajeFinal = `La película ${peliculaTaquillera.nombre} de ${peliculaTaquillera.director} fue la más taquillera, generando ${peliculaTaquillera.taquilla} millones de dólares.`;
+    return mensajeFinal;
+    }
+
+    //mostrar por pantalla
+    let div4=document.createElement('div');
+    div4.setAttribute('id','resultado5');
+    div4.innerHTML = filtroPelis(peliculas);
+    document.getElementById('resultado').appendChild(div4);
+
+</script>
+
+
+</body>
+</html>
