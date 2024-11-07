@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=;, initial-scale=1.0">
+    <title>Reloj</title>
+</head>
+<body>
+    <h1>Hora</h1>
+    <h2 id="tiempo"></h2>
+    <button id='parar'>Parar</button>
+    <button id='reanudar'>Reanudar</button>
+    <script>
+
+let intervalo;//Declaro variable para almacenarla
+    
+//Funcion para mostrar hora
+    function hora(){
+            let fecha = new Date();
+            let hora=fecha.getHours();
+            let minuto = fecha.getMinutes();
+            let segundo = fecha.getSeconds();
+
+            minuto = minuto < 10 ? '0'+minuto : minuto;
+            segundo = segundo < 10 ? '0'+segundo : segundo;
+        
+        return hora + ":"+ minuto + ":" + segundo;
+        }
+        
+        function iniciar() {
+            // Inicia el intervalo si no ha sido iniciado previamente
+            if (!intervalo) {
+                intervalo = setInterval(() => {
+                    document.getElementById('tiempo').innerHTML = hora();
+                }, 1000);
+            }
+        }
+
+    //funcion para detener el reloj
+        function parar(){
+        clearInterval(intervalo);
+        intervalo=null;
+
+    }
+
+    //funcion para reanudar
+    function reanudar(){
+            if(!intervalo){
+                iniciar();
+            }
+            }
+    
+    iniciar();
+    //se une el boton parar con la funcion parar
+    document.getElementById('parar').addEventListener('click', parar);
+    document.getElementById('reanudar').addEventListener('click', reanudar);
+
+        
+
+    </script>
+</body>
+</html>
